@@ -10,6 +10,9 @@
 		E461831E1C54D69000C4D886 /* rcmdServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E461831D1C54D69000C4D886 /* rcmdServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E46183251C54D69000C4D886 /* rcmdServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E461831A1C54D69000C4D886 /* rcmdServer.framework */; };
 		E461832A1C54D69000C4D886 /* rcmdServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46183291C54D69000C4D886 /* rcmdServerTests.swift */; };
+		E46183391C54D72400C4D886 /* PerfectHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46183381C54D72400C4D886 /* PerfectHandlers.swift */; };
+		E49A2A2B1C54D7F600FF7DD5 /* PerfectLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */; };
+		E49A2A2C1C54D7F600FF7DD5 /* PostgreSQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 		E46183241C54D69000C4D886 /* rcmdServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rcmdServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E46183291C54D69000C4D886 /* rcmdServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rcmdServerTests.swift; sourceTree = "<group>"; };
 		E461832B1C54D69000C4D886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E46183381C54D72400C4D886 /* PerfectHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerfectHandlers.swift; sourceTree = "<group>"; };
+		E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PerfectLib.framework; path = ../../../../Library/Frameworks/PerfectLib.framework; sourceTree = "<group>"; };
+		E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PostgreSQL.framework; path = ../../../../Library/Frameworks/PostgreSQL.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E49A2A2B1C54D7F600FF7DD5 /* PerfectLib.framework in Frameworks */,
+				E49A2A2C1C54D7F600FF7DD5 /* PostgreSQL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +61,8 @@
 		E46183101C54D69000C4D886 = {
 			isa = PBXGroup;
 			children = (
+				E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */,
+				E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */,
 				E461831C1C54D69000C4D886 /* rcmdServer */,
 				E46183281C54D69000C4D886 /* rcmdServerTests */,
 				E461831B1C54D69000C4D886 /* Products */,
@@ -71,6 +81,7 @@
 		E461831C1C54D69000C4D886 /* rcmdServer */ = {
 			isa = PBXGroup;
 			children = (
+				E46183381C54D72400C4D886 /* PerfectHandlers.swift */,
 				E461831D1C54D69000C4D886 /* rcmdServer.h */,
 				E461831F1C54D69000C4D886 /* Info.plist */,
 			);
@@ -194,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E46183391C54D72400C4D886 /* PerfectHandlers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,11 +317,17 @@
 		E461832F1C54D69000C4D886 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = rcmdServer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -317,17 +335,24 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gogozs.rcmdServer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E46183301C54D69000C4D886 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = rcmdServer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -379,6 +404,7 @@
 				E46183301C54D69000C4D886 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E46183311C54D69000C4D886 /* Build configuration list for PBXNativeTarget "rcmdServerTests" */ = {
 			isa = XCConfigurationList;
@@ -387,6 +413,7 @@
 				E46183331C54D69000C4D886 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
