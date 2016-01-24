@@ -33,8 +33,8 @@
 		E46183291C54D69000C4D886 /* rcmdServerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rcmdServerTests.swift; sourceTree = "<group>"; };
 		E461832B1C54D69000C4D886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E46183381C54D72400C4D886 /* PerfectHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerfectHandlers.swift; sourceTree = "<group>"; };
-		E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PerfectLib.framework; path = ../../../../Library/Frameworks/PerfectLib.framework; sourceTree = "<group>"; };
-		E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PostgreSQL.framework; path = ../../../../Library/Frameworks/PostgreSQL.framework; sourceTree = "<group>"; };
+		E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PerfectLib.framework; path = /Library/Frameworks/PerfectLib.framework; sourceTree = "<absolute>"; };
+		E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PostgreSQL.framework; path = /Library/Frameworks/PostgreSQL.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +61,10 @@
 		E46183101C54D69000C4D886 = {
 			isa = PBXGroup;
 			children = (
-				E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */,
-				E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */,
 				E461831C1C54D69000C4D886 /* rcmdServer */,
 				E46183281C54D69000C4D886 /* rcmdServerTests */,
 				E461831B1C54D69000C4D886 /* Products */,
+				E49A2A2D1C54D91500FF7DD5 /* Framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +94,15 @@
 				E461832B1C54D69000C4D886 /* Info.plist */,
 			);
 			path = rcmdServerTests;
+			sourceTree = "<group>";
+		};
+		E49A2A2D1C54D91500FF7DD5 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */,
+				E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
