@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E418B3F61C6DA1EA009420F0 /* TestMoviesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */; };
+		E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */; };
 		E461831E1C54D69000C4D886 /* rcmdServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E461831D1C54D69000C4D886 /* rcmdServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E46183251C54D69000C4D886 /* rcmdServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E461831A1C54D69000C4D886 /* rcmdServer.framework */; };
 		E461832A1C54D69000C4D886 /* rcmdServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46183291C54D69000C4D886 /* rcmdServerTests.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMoviesHandler.swift; sourceTree = "<group>"; };
+		E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postgreSQLConnect.swift; sourceTree = "<group>"; };
 		E461831A1C54D69000C4D886 /* rcmdServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = rcmdServer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E461831D1C54D69000C4D886 /* rcmdServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcmdServer.h; sourceTree = "<group>"; };
 		E461831F1C54D69000C4D886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				E46183381C54D72400C4D886 /* PerfectHandlers.swift */,
+				E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */,
+				E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */,
 				E461831D1C54D69000C4D886 /* rcmdServer.h */,
 				E461831F1C54D69000C4D886 /* Info.plist */,
 			);
@@ -214,6 +220,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E46183391C54D72400C4D886 /* PerfectHandlers.swift in Sources */,
+				E418B3F61C6DA1EA009420F0 /* TestMoviesHandler.swift in Sources */,
+				E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
