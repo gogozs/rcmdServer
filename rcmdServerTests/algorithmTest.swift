@@ -1,16 +1,14 @@
 //
-//  rcmdServerTests.swift
-//  rcmdServerTests
+//  algorithmTest.swift
+//  rcmdServer
 //
-//  Created by Song Zhou on 1/24/16.
+//  Created by Song Zhou on 3/19/16.
 //  Copyright © 2016 Song Zhou. All rights reserved.
 //
 
 import XCTest
 
-@testable import rcmdServer
-
-class rcmdServerTests: XCTestCase {
+class algorithmTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -25,7 +23,6 @@ class rcmdServerTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-       
     }
     
     func testPerformanceExample() {

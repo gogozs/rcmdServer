@@ -9,6 +9,19 @@
 /* Begin PBXBuildFile section */
 		E418B3F61C6DA1EA009420F0 /* TestMoviesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */; };
 		E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */; };
+		E45AD5631C9D9B2200133BC7 /* mathTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AD5621C9D9B2200133BC7 /* mathTest.swift */; };
+		E45AD5651C9D9B3800133BC7 /* algorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AD5641C9D9B3800133BC7 /* algorithmTest.swift */; };
+		E45F85551C8BC60A008E25D5 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1AE1C8A78B10030BD68 /* People.swift */; };
+		E45F85561C8BC60A008E25D5 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1AC1C8A78AD0030BD68 /* Movie.swift */; };
+		E45F85571C8BC60A008E25D5 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1A71C8A78050030BD68 /* Math.swift */; };
+		E45F85581C8BC60A008E25D5 /* recommenderAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1AA1C8A784B0030BD68 /* recommenderAlgorithm.swift */; };
+		E45F85591C8BC60A008E25D5 /* PerfectHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46183381C54D72400C4D886 /* PerfectHandlers.swift */; };
+		E45F855A1C8BC60A008E25D5 /* postgreSQLConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */; };
+		E45F855B1C8BC60A008E25D5 /* TestMoviesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */; };
+		E45F855C1C8BC60A008E25D5 /* UserUserCFHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */; };
+		E45F855D1C8BC60D008E25D5 /* PerfectLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */; };
+		E45F855E1C8BC60F008E25D5 /* PostgreSQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */; };
+		E45F85601C8BC6BA008E25D5 /* UserCFTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45F855F1C8BC6BA008E25D5 /* UserCFTest.swift */; };
 		E461831E1C54D69000C4D886 /* rcmdServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E461831D1C54D69000C4D886 /* rcmdServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E46183251C54D69000C4D886 /* rcmdServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E461831A1C54D69000C4D886 /* rcmdServer.framework */; };
 		E461832A1C54D69000C4D886 /* rcmdServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46183291C54D69000C4D886 /* rcmdServerTests.swift */; };
@@ -35,6 +48,9 @@
 /* Begin PBXFileReference section */
 		E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMoviesHandler.swift; sourceTree = "<group>"; };
 		E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postgreSQLConnect.swift; sourceTree = "<group>"; };
+		E45AD5621C9D9B2200133BC7 /* mathTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mathTest.swift; sourceTree = "<group>"; };
+		E45AD5641C9D9B3800133BC7 /* algorithmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = algorithmTest.swift; sourceTree = "<group>"; };
+		E45F855F1C8BC6BA008E25D5 /* UserCFTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCFTest.swift; sourceTree = "<group>"; };
 		E461831A1C54D69000C4D886 /* rcmdServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = rcmdServer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E461831D1C54D69000C4D886 /* rcmdServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rcmdServer.h; sourceTree = "<group>"; };
 		E461831F1C54D69000C4D886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +82,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E46183251C54D69000C4D886 /* rcmdServer.framework in Frameworks */,
+				E45F855D1C8BC60D008E25D5 /* PerfectLib.framework in Frameworks */,
+				E45F855E1C8BC60F008E25D5 /* PostgreSQL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				E46183291C54D69000C4D886 /* rcmdServerTests.swift */,
+				E45F855F1C8BC6BA008E25D5 /* UserCFTest.swift */,
+				E45AD5621C9D9B2200133BC7 /* mathTest.swift */,
+				E45AD5641C9D9B3800133BC7 /* algorithmTest.swift */,
 				E461832B1C54D69000C4D886 /* Info.plist */,
 			);
 			path = rcmdServerTests;
@@ -265,6 +286,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45F85551C8BC60A008E25D5 /* People.swift in Sources */,
+				E45F85561C8BC60A008E25D5 /* Movie.swift in Sources */,
+				E45F85571C8BC60A008E25D5 /* Math.swift in Sources */,
+				E45F85581C8BC60A008E25D5 /* recommenderAlgorithm.swift in Sources */,
+				E45F85591C8BC60A008E25D5 /* PerfectHandlers.swift in Sources */,
+				E45AD5651C9D9B3800133BC7 /* algorithmTest.swift in Sources */,
+				E45F855A1C8BC60A008E25D5 /* postgreSQLConnect.swift in Sources */,
+				E45F855B1C8BC60A008E25D5 /* TestMoviesHandler.swift in Sources */,
+				E45F85601C8BC6BA008E25D5 /* UserCFTest.swift in Sources */,
+				E45AD5631C9D9B2200133BC7 /* mathTest.swift in Sources */,
+				E45F855C1C8BC60A008E25D5 /* UserUserCFHandler.swift in Sources */,
 				E461832A1C54D69000C4D886 /* rcmdServerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +455,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = rcmdServerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gogozs.rcmdServerTests;
@@ -434,6 +470,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = rcmdServerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gogozs.rcmdServerTests;

@@ -8,38 +8,39 @@
 
 import Foundation
 
-public func avg(numbers:[Double]) -> Double {
+func avg(numbers:[Double]) -> Double {
     let count = Double(numbers.count)
-    if count != 0 {
-        var r :Double = 0.0
-        for i in numbers {
-            r += i
-        }
-        
-        return r / count
+    
+    guard count != 0 else {
+        return 0
     }
     
-    return 0.0
+    var r = 0.0
+    for i in numbers {
+        r += i
+    }
+    
+    return r / count
 }
 
-public func populationStandardDeviation(numbers: [Double]) -> Double {
+func populationStandardDeviation(numbers: [Double]) -> Double {
     return standardDeviation(numbers, isSample: false)
 }
 
-public func sampleStandardDeviation(numbers: [Double]) -> Double {
+func sampleStandardDeviation(numbers: [Double]) -> Double {
     return standardDeviation(numbers, isSample: true)
 }
 
-public func standardDeviation(numbers: [Double], isSample yesOrNo: Bool) -> Double {
+func standardDeviation(numbers: [Double], isSample yesOrNo: Bool) -> Double {
     var count = Double(numbers.count)
     if yesOrNo {
         count -= 1
     }
-    if count == 0 {
-       return 0.0
+    if (count == 0) {
+        return 0
     }
     
-    let mean = avg(numbers)
+   let mean = avg(numbers)
     
     var r :Double = 0.0
     for i in numbers {
@@ -49,18 +50,19 @@ public func standardDeviation(numbers: [Double], isSample yesOrNo: Bool) -> Doub
     return sqrt(r / count)
 }
 
-public func pearsonCorrelation(arrayA a: [Double], arrayB b: [Double]) -> Double {
-        var r: Double = 0.0
-    
-        if a.count != b.count {
+func pearsonCorrelation(arrayA a: [Double], arrayB b: [Double]) -> Double {
+        guard a.count == b.count else {
             return 0.0
         }
+    
+        var r: Double = 0.0
+    
         let count = a.count
     
-        let avgA = avg(a)
-        let avgB = avg(b)
+        let avgA =  avg(a)
+        let avgB =  avg(b)
         
-        for i in 0...(count-1) {
+        for i in 0 ..< count {
             r += (a[i] - avgA) * (b[i] - avgB)
         }
         

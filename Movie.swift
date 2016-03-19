@@ -17,24 +17,20 @@ func ==(lhs: Movie, rhs: Movie) -> Bool {
 }
 
 class Movie: Hashable, CustomStringConvertible {
+    let id: Int
     var name: String = ""
-    var id: Int?
-    var imdb_url: String = ""
+    var imdb_url: String?
     var genre: Int?
-    var release_data: String = ""
+    var release_data: String?
     
-    init(MovieName name: String) {
-        self.name = name
-    }
-    
-    convenience init() {
-        self.init(MovieName: "")
+    init(id: Int) {
+        self.id = id;
     }
     
     // MARK: - Hash
     var hashValue: Int {
         get {
-            return self.name.hashValue
+            return self.id
         }
     }
     
