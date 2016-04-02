@@ -40,14 +40,11 @@ class UserCFTest: XCTestCase {
         
         if ratingStatus == .CommandOK || ratingStatus == .TuplesOK {
             if ratingResult.numFields() > 0 && ratingResult.numTuples() > 0 {
-//
-                XCTAssert(ratingResult.getFieldInt(0, fieldIndex: 0) == 1, "get user_id failed")
-                XCTAssert(ratingResult.getFieldInt(0, fieldIndex: 1) == 61, "get movie_id failed")
-                XCTAssert(ratingResult.getFieldInt(0, fieldIndex: 2) == 4, "get rating failed")
+                XCTAssert(ratingResult.numTuples() == 93094, "number of ratings nor correct")
                 
                 for i in 0 ..< ratingResult.numTuples() {
-                    let u = ratingResult.getFieldInt(i, fieldIndex: 0)
-                    let m = ratingResult.getFieldInt(i, fieldIndex: 1)
+                    let m = ratingResult.getFieldInt(i, fieldIndex: 0)
+                    let u = ratingResult.getFieldInt(i, fieldIndex: 1)
                     let r = ratingResult.getFieldDouble(i, fieldIndex: 2)
                     
                     users[u]!.ratings[movies[m]!] = r
@@ -90,5 +87,19 @@ class UserCFTest: XCTestCase {
         let filter = UserUserCollaborating()
         let correlaitons = filter.top5UsersWith(user: users[1]!, users: Array(users.values), movies: Array(movies.values))
         XCTAssert(correlaitons.count == 5, "top 5 users count is not corrected")
+    }
+    
+    func testNonNormalizationPredictedRating() {
+        let filter = UserUserCollaborating()
+        let correlaitons = filter.top5UsersWith(user: users[1]!, users: Array(users.values), movies: Array(movies.values))
+        
+        filter.nonNormalizationPredictedRatingForUser(users[1]!, withCorrelations: correlaitons, movies: Array(movies.values), users: Array(users.values))
+    }
+    
+    func testNormalizationPredictedRating() {
+        let filter = UserUserCollaborating()
+        let correlaitons = filter.top5UsersWith(user: users[1]!, users: Array(users.values), movies: Array(movies.values))
+        
+        filter.normalizationPredictedRatingForUser(users[1]!, withCorrelations: correlaitons, peoples: Array(users.values), movies: Array(movies.values))
     }
 }

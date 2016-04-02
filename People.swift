@@ -9,7 +9,7 @@
 import Foundation
 
 typealias rating = [Movie: Score]
-typealias correlation = (PeopleID, Double)
+typealias correlation = [People: Double]
 
 enum Occupation: String {
     case Administrator, Doctor, Educator, Engineer, Entertainment,
@@ -66,10 +66,11 @@ class People: Hashable {
     var gender = Gender.Unknown
     var age = 0
     var zipCode = 0
+    var avgRating = 0.0
     
     var ratings = rating() // original ratings
     var predictions = rating() // predicted ratings
-    var correlations = [correlation]() // correlation with other user
+    var correlations = correlation() // correlation with other user
     
     init (id: Int) {
         self.ID = id;

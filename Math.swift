@@ -68,6 +68,6 @@ func pearsonCorrelation(arrayA a: [Double], arrayB b: [Double]) -> Double {
         
         let stdDeviationA = sampleStandardDeviation(a)
         let stdDeviationB = sampleStandardDeviation(b)
-        
+    
         return r / (stdDeviationA * stdDeviationB * Double(count - 1))
 }

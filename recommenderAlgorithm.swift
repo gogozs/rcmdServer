@@ -13,7 +13,8 @@ typealias correlationValue = Double
 typealias ratingAVG =  Double
 
 class UserUserCollaborating {
-    func pearsonCorrelationForUser(a: People, userB b: People, itemRange range: Range<Int>) -> Double {
+    /// Only calculate pearson correlation on intersect of two person rated items
+    func pearsonCorrelationForUser(a: People, userB b: People) -> Double {
         var r :Double = 0.0
     
 //        let ratingValuesForSortedMovieNames: (People) -> [Double] = { p in
@@ -27,10 +28,21 @@ class UserUserCollaborating {
 //        let ratingsA = ratingValuesForSortedMovieNames(a)
 //        let ratingsB = ratingValuesForSortedMovieNames(b)
         
-        let keys = Set(a.ratings.keys).intersect(Set(b.ratings.keys))
-        if keys.count == 0 {
-            return 0
+        if b.ID == 418 {
+            
         }
+        var commonMovieFactor = 1.0
+        let keys = Set(a.ratings.keys).intersect(Set(b.ratings.keys))
+        
+        if keys.count == 0 {
+            return 0.0
+        }
+        
+        if keys.count < 5 {
+            commonMovieFactor = Double(keys.count) / 5.0
+        }
+        
+//        print("common movies count: \(keys.count), People ID: \(a.ID) - \(b.ID)")
         
         let validRatingsA = keys.sort{
             $0.id < $1.id
@@ -53,68 +65,85 @@ class UserUserCollaborating {
 //            }
 //        }
         
-//        r = pearsonCorrelation(arrayA: validRatingsA, arrayB: validRatingsB);
+        r = pearsonCorrelation(arrayA: validRatingsA, arrayB: validRatingsB) * commonMovieFactor;
         
         return r;
         
     }
     
     // return top 5 most correlatd user IDs
-    func top5UsersWith(user u: People, users: [People], movies: [Movie]) -> ([correlation]) {
+    func top5UsersWith(user u: People, users: [People], movies: [Movie]) -> (correlation) {
         let targetPeople = u
     
+        var correlations = targetPeople.correlations
         for people in users {
-            targetPeople.correlations.append(
-                (people.ID, pearsonCorrelationForUser(targetPeople, userB: people, itemRange: 0..<min(people.ratings.count, targetPeople.ratings.count)))
-            )
+            correlations[people] = pearsonCorrelationForUser(targetPeople, userB: people)
         }
-        let correlations = targetPeople.correlations.sort { $0.1 > $1.1}
+        let correlationsKeys = Array(correlations.keys).sort {
+            correlations[$0] > correlations[$1]
+        }
+            
     
         // omit self(0)
-        return Array(correlations[1...5])
+        var r = correlation()
+        for i in 1...5 {
+            let key = correlationsKeys[i]
+            r[key] = correlations[key]!
+        }
+        
+        return r
     }
     
-    func nonNormalizationPredictedRatingForUser(u: People, withCorrelations correlations: [correlation], movies: [Movie], users: [People]) {
+    func nonNormalizationPredictedRatingForUser(u: People, withCorrelations correlations: correlation, movies: [Movie], users: [People]) {
         for movie in movies {
             var sumOfWeightedRatings = 0.0
             var weights = 0.0
-            for c in correlations {
-                let p = users.filter {$0.ID == c.0}.first!
-                let rating = p.ratings[movie]!
-                let weight = rating > 0 ? c.1: 0.0
-    
-                sumOfWeightedRatings += rating * weight
-                weights += weight
-    
+            for (people, correlation) in correlations {
+                if let rating = people.ratings[movie] {
+                    sumOfWeightedRatings += rating * correlation
+                    weights += correlation
+                }
             }
-            u.predictions[movie] = sumOfWeightedRatings / weights
+            
+            // if no one in correlations with user u has rated this movie
+            if weights == 0 {
+                u.predictions[movie] = 0
+            } else {
+                u.predictions[movie] = sumOfWeightedRatings / weights
+            }
         }
     }
     
-    func normalizationPredictedRatingForUser(u: People, withCorrelations correlations: [correlation], peoples: [People], movies: [Movie]) {
-        var correlationPeoples = [(People, ratingAVG, correlationValue)]()
-        for c in correlations {
-            let p = peoples.filter {$0.ID == c.0}.first!
-    
-            let validRatings: [Double] = p.ratings.values.filter { $0 > 0 }
-//            let ratingAvg = avg(validRatings)
-    
-//            correlationPeoples.append((p, ratingAvg, c.1))
+    func normalizationPredictedRatingForUser(u: People, withCorrelations correlations: correlation, peoples: [People], movies: [Movie]) {
+        // calculate correlation with user u users avg rating
+        for (p, _) in correlations {
+            self.calculateAVGRatingForUser(p)
         }
-    
+        
+        self.calculateAVGRatingForUser(u)
+        
         for movie in movies {
             var sumOfWeightedRatings = 0.0
             var weights = 0.0
-            for p in correlationPeoples {
-                let rating = p.0.ratings[movie]!
-                let weight = rating > 0 ? p.2: 0.0
-    
-                sumOfWeightedRatings += (rating - p.1) * weight
-                weights += weight
-                
+            for (people, correlation) in correlations {
+                if let rating = people.ratings[movie] {
+                    sumOfWeightedRatings += (rating - people.avgRating) * correlation
+                    weights += correlation
+                }
             }
-//            u.predictions[movie] = sumOfWeightedRatings / weights + avg(u.ratings.values.filter {$0 > 0})
+            
+            // if no one in correlations with user u has rated this movie
+            if weights == 0 {
+                u.predictions[movie] = 0
+            } else {
+                u.predictions[movie] = sumOfWeightedRatings / weights + u.avgRating
+            }
         }
+        
+    }
+    
+    func calculateAVGRatingForUser(u: People) {
+        u.avgRating = avg(Array(u.ratings.values))
     }
     
     
