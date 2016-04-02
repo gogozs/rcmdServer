@@ -10,71 +10,61 @@ import Foundation
 import PerfectLib
 import PostgreSQL
 
+let userIDKey = "user_id"
+
 class userUserCollaborativeFilterHandler: RequestHandler {
     func handleRequest(request: WebRequest, response: WebResponse) {
-        let pgsl = PostgreSQL.PGConnection()
-        pgsl.connectdb(connectInfo)
+        var resultStr = ""
         
-        var resultStr = pgsl.errorMessage()
+        let dataManager = DataManager.sharedInstance
         
-        var users = [Int: People]()
-        var movies = [Int: Movie]()
+        let filter = UserUserCollaborating()
         
-        if pgsl.status() == .Bad {
+        var user: People?
+        if let userIDStr = request.urlVariables[userIDKey] {
+            if let userID = Int(userIDStr) {
+                user = dataManager.getUserWithUserID(userID)
+            } else {
+                resultStr = "user id format is not correct"
+            }
         } else {
-            
-            let result = pgsl.exec("select * from \"user\"")
-            let s = result.status()
-            if s == .CommandOK || s == .TuplesOK {
-                if result.numFields() > 0 && result.numTuples() > 0 {
-                    for i in 0..<result.numTuples() {
-                        let p = People(id: result.getFieldInt(i, fieldIndex: 0))
-                        users[p.ID] = p
-                    
-                    }
-                }
-            }
-            
-            let movieResult = pgsl.exec("select * from movie")
-            let movieStatus = movieResult.status()
-            
-            if movieStatus == .CommandOK || movieStatus == .TuplesOK {
-                if movieResult.numFields() > 0 && movieResult.numTuples() > 0 {
-                    for i in 0 ..< movieResult.numTuples() {
-                        let m = Movie(id: movieResult.getFieldInt(i, fieldIndex: 0))
-                        movies[m.id] = m
-                    }
-                }
-            }
-            
-            let ratingResult = pgsl.exec("select * from rating where user_id = 1")
-            let ratingStatus = ratingResult.status()
-            
-            if ratingStatus == .CommandOK || ratingStatus == .TuplesOK {
-                if ratingResult.numFields() > 0 && ratingResult.numTuples() > 0 {
-                    for i in 0 ..< ratingResult.numTuples() {
-                        let u = ratingResult.getFieldInt(i, fieldIndex: 0)
-                        let m = ratingResult.getFieldInt(i, fieldIndex: 1)
-                        let r = ratingResult.getFieldDouble(i, fieldIndex: 2)
-                        resultStr += "\(u), \(m), \(r)\n"
-                        users[u]!.ratings[movies[m]!] = r
-                    }
-                }
-            }
-            
+            resultStr = "you need provid user id"
         }
         
-//        for u in users.enumerate() {
-//            for m in u.element.1.ratings.enumerate() {
-//                resultStr += "uid: \(u.element.0), ratings: (\(m.element.0): \(m.element.1))\n"
-//            }
-//        }
-        
-        let p = users[1]
-        
-        print("\(p?.ratings[movies[3]!])")
-        
-        pgsl.close()
+        if let u = user {
+            if let users = dataManager.users, let movies = dataManager.movies {
+                let correlations = filter.top5UsersWith(user: u, users: users, movies: movies)
+                filter.normalizationPredictedRatingForUser(u, withCorrelations: correlations, peoples: users, movies: movies)
+                
+                let predictions = u.predictions
+                
+                let predictedKeys =  Array(predictions.keys)
+                let sortedMovies = predictedKeys.sort{predictions[$0] > predictions[$1]}
+                
+                var jsonArray = [[String: AnyObject]]()
+                for i in 0...4 {
+                    let movie = sortedMovies[i]
+                    let item = ["id": movie.id,
+                                "name": movie.name,
+                                "genre": movie.genre ?? 0,
+                                "release_date": movie.release_data ?? "",
+                                "prediction": predictions[movie] ?? 0.0
+                    ]
+                    jsonArray.append(item as! [String : AnyObject])
+                }
+                
+                do {
+                    let data = try NSJSONSerialization.dataWithJSONObject(jsonArray, options: .PrettyPrinted)
+                    resultStr = String.init(data: data, encoding: NSUTF8StringEncoding)!
+                } catch {
+                }
+            } else {
+                resultStr = "can not get users & movies form database"
+            }
+            
+        } else {
+            resultStr = "can not find requested user"
+        }
         
         response.addHeader("Content-Type", value: "application/json")
         response.appendBodyString(resultStr)

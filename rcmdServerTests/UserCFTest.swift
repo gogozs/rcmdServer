@@ -101,5 +101,29 @@ class UserCFTest: XCTestCase {
         let correlaitons = filter.top5UsersWith(user: users[1]!, users: Array(users.values), movies: Array(movies.values))
         
         filter.normalizationPredictedRatingForUser(users[1]!, withCorrelations: correlaitons, peoples: Array(users.values), movies: Array(movies.values))
+        
+        let predictions = users[1]!.predictions
+        let predictedKeys =  Array(predictions.keys)
+        let sortedMovies = predictedKeys.sort{predictions[$0] > predictions[$1]}
+        
+        var jsonArray = [[String: AnyObject]]()
+        for i in 0...4 {
+            let movie = sortedMovies[i]
+            let item = ["id": movie.id,
+                        "name": movie.name,
+                        "genre": movie.genre ?? 0,
+                        "release_date": movie.release_data ?? "",
+                        "prediction": predictions[movie] ?? 0.0
+                        ]
+            jsonArray.append(item as! [String : AnyObject])
+        }
+        
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(jsonArray, options: .PrettyPrinted)
+            let str = String.init(data: data, encoding: NSUTF8StringEncoding)
+            print("\(str!)")
+        } catch {
+        }
+        
     }
 }
