@@ -66,7 +66,13 @@ class People: Hashable {
     var gender = Gender.Unknown
     var age = 0
     var zipCode = 0
-    var avgRating = 0.0
+    lazy var avgRating: Double  =  {
+        guard self.ratings.keys.count > 0 else { // must has ratings
+            return 0.0
+        }
+        
+        return avg(Array(self.ratings.values))
+    }()
     
     var ratings = rating() // original ratings
     var predictions = rating() // predicted ratings

@@ -92,11 +92,7 @@ class UserUserCollaborating {
     
     func normalizationPredictedRatingForUser(u: People, withCorrelations correlations: correlation, peoples: [People], movies: [Movie]) {
         // calculate correlation with user u users avg rating
-        for (p, _) in correlations {
-            self.calculateAVGRatingForUser(p)
-        }
         
-        self.calculateAVGRatingForUser(u)
         
         for movie in movies {
             var sumOfWeightedRatings = 0.0
@@ -118,8 +114,141 @@ class UserUserCollaborating {
         
     }
     
-    func calculateAVGRatingForUser(u: People) {
-        u.avgRating = avg(Array(u.ratings.values))
+    
+}
+
+class ItemItemCF {
+    // MARK: - Similarity
+    /// Calculate similarity between two movies
+    func itemSimilarity(movie1: Movie, movie2: Movie, users: [People]) -> Double {
+        let ratedUserThreshold = Int(ceil(Double(users.count) * ratedUserThresholdPercent))
+        
+       // find users who both rated movie1 and movie2
+       var ratedUsers = [People]()
+        for user in users {
+            if user.ratings[movie1] != nil && user.ratings[movie2] != nil {
+               ratedUsers.append(user)
+            }
+        }
+        
+        guard ratedUsers.count >= ratedUserThreshold else {
+            return 0.0
+        }
+        // Calculate weighted avg
+        var sumOfNomalizedRatings = 0.0
+        var weightsOf1 = 0.0
+        var weightsOf2 = 0.0
+        
+        for user in ratedUsers {
+            let r1 = user.ratings[movie1]! - user.avgRating
+            let r2 = user.ratings[movie2]! - user.avgRating
+            
+            sumOfNomalizedRatings +=  r1 * r2
+            weightsOf1 += pow(r1, 2)
+            weightsOf2 += pow(r2, 2)
+            
+        }
+        
+        guard weightsOf1 != 0.0 && weightsOf2 != 0.0 else {
+            return 0.0
+        }
+        
+        return sumOfNomalizedRatings / (sqrt(weightsOf1) * sqrt(weightsOf2))
     }
     
+    /// Return movie similarities with target movie
+    private func similarMoviesWithMovie(movie: Movie, movies: [Movie], users: [People]) -> [Movie: Double] {
+        var result = [Movie: Double]()
+        
+        for m in movies {
+            if m != movie { // omit compare self
+               result[m] = self.itemSimilarity(movie, movie2: m, users: users)
+            }
+        }
+        
+        return result
+    }
+    
+    /// Find most similar movies, limit 20
+    private func top20SimilarMoviesWithMovie(movie: Movie, movies: [Movie], users: [People]) -> [Movie: Double] {
+       return self.topNSimilarMoviesWithMovie(movie, N: 20, movies: movies, users: users)
+    }
+    
+    /// Find most similar movies, limit N
+    private func topNSimilarMoviesWithMovie(movie: Movie, N: Int, movies: [Movie], users: [People]) -> [Movie: Double] {
+        let movieSimilarities = self.similarMoviesWithMovie(movie, movies: movies, users: users)
+        
+        let sortedMovies = Array(movieSimilarities.keys.sort {movieSimilarities[$0] > movieSimilarities[$1]})
+        
+        let limitMovies = Array(sortedMovies[0 ..< N])
+        
+        var result = [Movie: Double]()
+        for m in limitMovies {
+            result[m] = movieSimilarities[m]
+        }
+        
+        return result
+    }
+  
+    // MARK:- Similarity within taget user
+    /// Find most similar movies with target movie that user has rated, at most limit 20
+    /// @note return count may less than 20
+    private func similar20MoviesUserRated(u: People, movie: Movie, movies: [Movie], users: [People]) -> [Movie: Double] {
+        return self.similarMoviesUserRated(u, movie: movie, N: 20, movies: movies, users: users)
+    }
+    
+    /// Find most similar movies that user has rated, at most limit N
+    private func similarMoviesUserRated(u: People, movie: Movie, N: Int, movies: [Movie], users: [People]) -> [Movie: Double] {
+        // Find movies with similarity that user has rated
+        let movieSimilarities = self.similarMoviesWithMovie(movie, movies: movies, users: users)
+        
+        let ratedMovies = Array(u.ratings.keys)
+        
+        var ratedSimilarites = [Movie: Double]()
+        
+        for movie in ratedMovies {
+            ratedSimilarites[movie] = movieSimilarities[movie]
+        }
+        
+        // Limit by similarity at most N
+        var sortedMovies = Array(ratedSimilarites.keys.sort {ratedSimilarites[$0] > ratedSimilarites[$1]})
+        if sortedMovies.count > N {
+            sortedMovies = Array(sortedMovies[0 ..< N])
+        }
+        
+        // Construct result dict
+        var result = [Movie: Double]()
+        for m in sortedMovies{
+            result[m] = ratedSimilarites[m]
+        }
+        
+        return result
+        
+    }
+  
+    
+    // MARK: - Predicting
+    /// Predicting user `u` rating with target movie `i`
+    func predictingRating(u: People, forItem i: Movie, movies: [Movie], users: [People]) -> Double {
+        guard u.ratings.count >= 20 else {
+            return 0.0
+        }
+        
+       let topMovies = self.similar20MoviesUserRated(u, movie: i, movies: movies, users: users)
+        
+        var sumOfWeightedRatings = 0.0
+        var weights = 0.0
+        
+        for (movie, similarity) in topMovies {
+            sumOfWeightedRatings += u.ratings[movie]! * similarity
+            weights += fabs(similarity)
+        }
+        
+        guard weights != 0.0 else {
+            return 0.0
+        }
+        
+        return sumOfWeightedRatings / weights
+        
+    }
 }

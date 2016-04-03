@@ -1,5 +1,5 @@
 //
-//  UserCFTest.swift
+//  CFTest.swift
 //  rcmdServer
 //
 //  Created by Song Zhou on 3/6/16.
@@ -12,7 +12,7 @@ import XCTest
 @testable import PerfectLib
 @testable import PostgreSQL
 
-class UserCFTest: XCTestCase {
+class CFTest: XCTestCase {
     var pgsl: PGConnection!
     var resultStr: String = ""
     
@@ -106,6 +106,13 @@ class UserCFTest: XCTestCase {
         let predictedKeys =  Array(predictions.keys)
         let sortedMovies = predictedKeys.sort{predictions[$0] > predictions[$1]}
         
+        // test top 5 predicted movies IDs are correct
+        XCTAssert(sortedMovies[0].id == 902)
+        XCTAssert(sortedMovies[1].id == 242)
+        XCTAssert(sortedMovies[2].id == 898)
+        XCTAssert(sortedMovies[3].id == 270)
+        XCTAssert(sortedMovies[4].id == 269)
+        
         var jsonArray = [[String: AnyObject]]()
         for i in 0...4 {
             let movie = sortedMovies[i]
@@ -125,5 +132,23 @@ class UserCFTest: XCTestCase {
         } catch {
         }
         
+    }
+    
+    func testItemSimilarity() {
+        let filter = ItemItemCF()
+        // compare God Father
+        let godFather = movies[127]!
+        let s = filter.itemSimilarity(godFather, movie2: movies[187]!, users: Array(users.values))
+        XCTAssert(fabs(s - 0.771) < 0.01)
+        
+    }
+    
+    func testItemItemCF() {
+        let filter = ItemItemCF()
+        let godFather = movies[127]!
+        
+        let r = filter.predictingRating(users[1]!, forItem: godFather, movies: Array(movies.values), users: Array(users.values))
+        // result: 4.3422518850171405
+        XCTAssert(fabs(r - 4.34225) < 0.01)
     }
 }
