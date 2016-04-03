@@ -13,24 +13,11 @@ typealias correlationValue = Double
 typealias ratingAVG =  Double
 
 class UserUserCollaborating {
+    
     /// Only calculate pearson correlation on intersect of two person rated items
     func pearsonCorrelationForUser(a: People, userB b: People) -> Double {
         var r :Double = 0.0
     
-//        let ratingValuesForSortedMovieNames: (People) -> [Double] = { p in
-//            p.ratings.keys.sort {
-//                $0.id > $1.id
-//            }.map {
-//                p.ratings[$0]!
-//            }
-//        }
-        
-//        let ratingsA = ratingValuesForSortedMovieNames(a)
-//        let ratingsB = ratingValuesForSortedMovieNames(b)
-        
-        if b.ID == 418 {
-            
-        }
         var commonMovieFactor = 1.0
         let keys = Set(a.ratings.keys).intersect(Set(b.ratings.keys))
         
@@ -41,8 +28,6 @@ class UserUserCollaborating {
         if keys.count < 5 {
             commonMovieFactor = Double(keys.count) / 5.0
         }
-        
-//        print("common movies count: \(keys.count), People ID: \(a.ID) - \(b.ID)")
         
         let validRatingsA = keys.sort{
             $0.id < $1.id
@@ -55,15 +40,6 @@ class UserUserCollaborating {
             }.map {
                 b.ratings[$0]!
             }
-        
-        
-//        for i in 0 ..< keys.count {
-//            if ratingsA[i] > -1 && ratingsB[i] > -1 {
-//                validRatingsA.append(ratingsA[i])
-//                validRatingsB.append(ratingsB[i])
-//                
-//            }
-//        }
         
         r = pearsonCorrelation(arrayA: validRatingsA, arrayB: validRatingsB) * commonMovieFactor;
         
@@ -145,6 +121,5 @@ class UserUserCollaborating {
     func calculateAVGRatingForUser(u: People) {
         u.avgRating = avg(Array(u.ratings.values))
     }
-    
     
 }
