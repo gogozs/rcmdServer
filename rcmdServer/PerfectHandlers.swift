@@ -43,6 +43,8 @@ public func PerfectServerModuleInit() {
     
     Routing.Routes["GET", "/testMovies/"] = {_ in return TestMoviesHandler() }
     Routing.Routes["GET", "/userUserCF/{\(userIDKey)}"] = {_ in return userUserCollaborativeFilterHandler() }
+    Routing.Routes["GET", "/itemItemCF/{\(itemIDKey)}/{\(itemCountKey)}"] = {_ in return ItemItemCFHandler()}
+    Routing.Routes["GET", "/movie/{\(itemIDKey)}"] = {_ in return ItemDetailHandler()}
 	
 	// Test this one via command line with curl:
 	// curl --data "{\"id\":123}" http://0.0.0.0:8181/raw --header "Content-Type:application/json"

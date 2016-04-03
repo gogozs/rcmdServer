@@ -10,8 +10,6 @@ import Foundation
 import PerfectLib
 import PostgreSQL
 
-let userIDKey = "user_id"
-
 class userUserCollaborativeFilterHandler: RequestHandler {
     func handleRequest(request: WebRequest, response: WebResponse) {
         var resultStr = ""

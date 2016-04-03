@@ -97,4 +97,8 @@ class DataManager {
         return usersDict[id]
     }
     
+    func getMovieWithID(id: Int) -> Movie? {
+        return moviesDict[id]
+    }
+    
 }

@@ -175,7 +175,7 @@ class ItemItemCF {
     }
     
     /// Find most similar movies, limit N
-    private func topNSimilarMoviesWithMovie(movie: Movie, N: Int, movies: [Movie], users: [People]) -> [Movie: Double] {
+    func topNSimilarMoviesWithMovie(movie: Movie, N: Int, movies: [Movie], users: [People]) -> [Movie: Double] {
         let movieSimilarities = self.similarMoviesWithMovie(movie, movies: movies, users: users)
         
         let sortedMovies = Array(movieSimilarities.keys.sort {movieSimilarities[$0] > movieSimilarities[$1]})
@@ -249,6 +249,31 @@ class ItemItemCF {
         }
         
         return sumOfWeightedRatings / weights
+        
+    }
+    
+    /// Predicting top N movies for user `u`, exclude rated movies
+    /// @note result count may less than N
+    /// @deprected cost too much
+    func predictedTopNMovies(withUser u: People, N: Int, movies: [Movie], users: [People]) -> [Movie: Double] {
+       let notRatedMovies = Set(movies).subtract(Set(u.ratings.keys))
+        
+        var predictedMovies = [Movie: Double]()
+        for movie in notRatedMovies {
+            predictedMovies[movie] = self.predictingRating(u, forItem: movie, movies: movies, users: users)
+        }
+        
+        let sortedMovies = predictedMovies.keys.sort {predictedMovies[$0] > predictedMovies[$1]}
+        
+        let limitedMovies = Array(sortedMovies[0 ..< N])
+        
+        var results = [Movie: Double]()
+        
+        for m in limitedMovies {
+            results[m] = predictedMovies[m]
+        }
+        
+        return results
         
     }
 }

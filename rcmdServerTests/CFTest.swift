@@ -19,6 +19,8 @@ class CFTest: XCTestCase {
     var users = [Int: People]()
     var movies = [Int: Movie]()
     
+    lazy var itemItemCFFilter = ItemItemCF()
+    
     override func setUp() {
         super.setUp()
         
@@ -135,20 +137,31 @@ class CFTest: XCTestCase {
     }
     
     func testItemSimilarity() {
-        let filter = ItemItemCF()
         // compare God Father
         let godFather = movies[127]!
-        let s = filter.itemSimilarity(godFather, movie2: movies[187]!, users: Array(users.values))
+        let s = itemItemCFFilter.itemSimilarity(godFather, movie2: movies[187]!, users: Array(users.values))
         XCTAssert(fabs(s - 0.771) < 0.01)
         
     }
     
     func testItemItemCF() {
-        let filter = ItemItemCF()
         let godFather = movies[127]!
         
-        let r = filter.predictingRating(users[1]!, forItem: godFather, movies: Array(movies.values), users: Array(users.values))
+        let r = itemItemCFFilter.predictingRating(users[1]!, forItem: godFather, movies: Array(movies.values), users: Array(users.values))
         // result: 4.3422518850171405
         XCTAssert(fabs(r - 4.34225) < 0.01)
+        
+//        let predictedMovies = filter.predictedTopNMovies(withUser: users[1]!, N: 20, movies: Array(movies.values), users: Array(users.values))
+//        for (movie, prediction) in predictedMovies {
+//            print("\(movie): \(prediction)")
+//        }
+    }
+    
+    func testTopNSimilarMovies() {
+        let godFather = movies[127]!
+        let r = itemItemCFFilter.topNSimilarMoviesWithMovie(godFather, N: 20, movies: Array(movies.values), users: Array(users.values))
+        for (movie, similarity) in r {
+            print("\(movie.id): \(similarity)")
+        }
     }
 }

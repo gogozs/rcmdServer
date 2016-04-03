@@ -11,3 +11,19 @@ import Foundation
 // ItemItemCF
 let ratedUserThresholdPercent = 0.005
 //let mostSimilarMoviesCount = 20
+
+
+// MARK: - Request key
+let itemIDKey = "item_id"
+let itemCountKey = "item_count"
+
+let userIDKey = "user_id"
+
+// MARK: - Response key
+// Movie
+let movieIDKey = "movie_id"
+let movieNameKey = "movie_name"
+let movieGenreKey = "movie_genre"
+let movieReleaseDateKey = "release_date"
+
+let similarityKey = "similarity"
