@@ -20,23 +20,16 @@ class ItemDetailHandler: RequestHandler {
             if let itemID = Int(itemIDStr) {
                 item = dataManager.getMovieWithID(itemID)
             } else {
-                resultStr = "request variables format is not correct"
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
             }
         } else {
-            resultStr = "you need provid item id"
+            resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestVariablesNotFound.rawValue, userInfo: nil))
         }
         
         if let i = item {
-            let item = [
-                movieIDKey: i.id,
-                movieNameKey: i.name,
-                movieGenreKey: i.genre ?? 0,
-                movieReleaseDateKey: i.release_data ?? ""
-            ]
-            
-            resultStr = String.JSONStrFromObject(item)
+            resultStr = String.JSONStrFromObject(i.movieResponse)
         } else {
-           resultStr = "can not get movie from database"
+            resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
         }
         
         response.addHeader("Content-Type", value: "application/json")

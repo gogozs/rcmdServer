@@ -20,6 +20,7 @@ class DataManager {
     
     private var usersDict = [Int: People]()
     private var moviesDict = [Int: Movie]()
+    var searchedMovies = [Int: Movie]?()
     
     init() {
         pgsl = PostgreSQL.PGConnection()
@@ -68,6 +69,8 @@ class DataManager {
             } else {
                 users = nil
             }
+        } else {
+            users = nil
         }
     }
     
@@ -76,20 +79,45 @@ class DataManager {
         let s = result.status()
         if s == .CommandOK || s == .TuplesOK {
             if result.numFields() > 0 && result.numTuples() > 0 {
-                for i in 0..<result.numTuples() {
-                    let m = Movie(id: result.getFieldInt(i, fieldIndex: 0))
-                    m.name = result.getFieldString(i, fieldIndex: 1)
-                    m.release_data = result.getFieldString(i, fieldIndex: 2)
-                    m.genre = result.getFieldInt(i, fieldIndex: 4)
-                    
-                    moviesDict[m.id] = m
-                    
-                }
+                moviesDict = self.constructMovie(result)
+                movies = Array(moviesDict.values)
+            } else {
+                movies = nil
             }
-            movies = Array(moviesDict.values)
         } else {
             movies = nil
         }
+    }
+    
+    func searchMovie(keyword: String) {
+        let select = "select * from movie where lower(name) like '%\(keyword)%'"
+        print(select)
+        let result = pgsl.exec(select)
+        let s = result.status()
+        if s == .CommandOK || s == .TuplesOK {
+            if result.numFields() > 0 && result.numTuples() > 0 {
+                searchedMovies = self.constructMovie(result)
+            } else {
+                searchedMovies = nil
+            }
+        } else {
+            searchedMovies = nil
+        }
+    }
+    
+    // MARK: - Construct model from PGResult
+    private func constructMovie(result: PGResult) -> [Int: Movie] {
+        var moviesDict = [Int: Movie]()
+        for i in 0..<result.numTuples() {
+            let m = Movie(id: result.getFieldInt(i, fieldIndex: 0))
+            m.name = result.getFieldString(i, fieldIndex: 1)
+            m.release_data = result.getFieldString(i, fieldIndex: 2)
+            m.genre = result.getFieldInt(i, fieldIndex: 4)
+            
+            moviesDict[m.id] = m
+            
+        }
+        return moviesDict
     }
     
     // MARK -

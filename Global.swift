@@ -15,9 +15,11 @@ let ratedUserThresholdPercent = 0.005
 
 // MARK: - Request key
 let itemIDKey = "item_id"
+let itemNameKey = "item_name"
 let itemCountKey = "item_count"
 
 let userIDKey = "user_id"
+let countKey = "count"
 
 // MARK: - Response key
 // Movie
@@ -27,3 +29,11 @@ let movieGenreKey = "movie_genre"
 let movieReleaseDateKey = "release_date"
 
 let similarityKey = "similarity"
+
+// error
+let errorDomain = "me.songzhou.RCMDErrorDomain"
+enum NetworkError: Int {
+    case requestFormatError
+    case requestVariablesNotFound
+    case resultNotFound
+}

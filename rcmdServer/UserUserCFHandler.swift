@@ -23,10 +23,10 @@ class userUserCollaborativeFilterHandler: RequestHandler {
             if let userID = Int(userIDStr) {
                 user = dataManager.getUserWithUserID(userID)
             } else {
-                resultStr = "user id format is not correct"
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
             }
         } else {
-            resultStr = "you need provid user id"
+            resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestVariablesNotFound.rawValue, userInfo: nil))
         }
         
         if let u = user {
@@ -57,11 +57,11 @@ class userUserCollaborativeFilterHandler: RequestHandler {
                 } catch {
                 }
             } else {
-                resultStr = "can not get users & movies form database"
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
             }
             
         } else {
-            resultStr = "can not find requested user"
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
         }
         
         response.addHeader("Content-Type", value: "application/json")

@@ -38,6 +38,14 @@ class Movie: Hashable, CustomStringConvertible {
         return self.name
     }
     
+    // MARK: - Response
+    lazy var movieResponse: [String: AnyObject] = {
+         return [
+            movieIDKey: self.id,
+            movieNameKey: self.name,
+            movieGenreKey: self.genre ?? 0,
+            movieReleaseDateKey: self.release_data ?? ""
+        ]
+    }()
+    
 }
-
-

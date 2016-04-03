@@ -20,4 +20,12 @@ extension String {
         }
         
     }
+    
+    static func JSONStrErrorWithError(e: NSError) -> String {
+        return self.JSONStrFromObject(
+            [
+                "error_code": "\(e.code)",
+                "error_domain": "\(e.domain)"
+            ])
+    }
 }

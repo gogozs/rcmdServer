@@ -23,10 +23,10 @@ class ItemItemCFHandler: RequestHandler {
                 item = dataManager.getMovieWithID(itemID)
                 N = NInt
             } else {
-                resultStr = "request variables format is not correct"
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
             }
         } else {
-            resultStr = "you need provid item id and N count"
+            resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestVariablesNotFound.rawValue, userInfo: nil))
         }
         
         if let i = item, let N = N{
@@ -40,19 +40,12 @@ class ItemItemCFHandler: RequestHandler {
                                 similarityKey: similarity]
                     jsonArray.append(item as! [String: AnyObject])
                 }
-                
-//                do {
-//                    let data = try NSJSONSerialization.dataWithJSONObject(jsonArray, options: .PrettyPrinted)
-//                    resultStr = String.init(data: data, encoding: NSUTF8StringEncoding)!
-//                } catch {
-//                    
-//                }
                 resultStr = String.JSONStrFromObject(jsonArray)
             } else {
-                resultStr = "can not get users & movies form database"
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
             }
         } else {
-            resultStr = "can not find requested item"
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
         }
         
         response.addHeader("Content-Type", value: "application/json")

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E418B3F61C6DA1EA009420F0 /* TestMoviesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */; };
 		E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */; };
 		E45AD5631C9D9B2200133BC7 /* mathTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AD5621C9D9B2200133BC7 /* mathTest.swift */; };
 		E45AD5651C9D9B3800133BC7 /* algorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AD5641C9D9B3800133BC7 /* algorithmTest.swift */; };
@@ -17,7 +16,6 @@
 		E45F85581C8BC60A008E25D5 /* recommenderAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1AA1C8A784B0030BD68 /* recommenderAlgorithm.swift */; };
 		E45F85591C8BC60A008E25D5 /* PerfectHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46183381C54D72400C4D886 /* PerfectHandlers.swift */; };
 		E45F855A1C8BC60A008E25D5 /* postgreSQLConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */; };
-		E45F855B1C8BC60A008E25D5 /* TestMoviesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */; };
 		E45F855C1C8BC60A008E25D5 /* UserUserCFHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */; };
 		E45F855D1C8BC60D008E25D5 /* PerfectLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49A2A291C54D7F600FF7DD5 /* PerfectLib.framework */; };
 		E45F855E1C8BC60F008E25D5 /* PostgreSQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49A2A2A1C54D7F600FF7DD5 /* PostgreSQL.framework */; };
@@ -32,6 +30,8 @@
 		E486059B1CB132AC00CDC0C9 /* ItemItemCFHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48605991CB1323600CDC0C9 /* ItemItemCFHandler.swift */; };
 		E486059D1CB147B700CDC0C9 /* ItemDetailHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E486059C1CB147B700CDC0C9 /* ItemDetailHandler.swift */; };
 		E486059F1CB14A8400CDC0C9 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E486059E1CB14A8400CDC0C9 /* StringExtension.swift */; };
+		E48605A11CB14DE400CDC0C9 /* MovieSearchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48605A01CB14DE400CDC0C9 /* MovieSearchHandler.swift */; };
+		E48605A51CB177EF00CDC0C9 /* topNMoviesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48605A41CB177EF00CDC0C9 /* topNMoviesHandler.swift */; };
 		E493F1A61C8A775E0030BD68 /* UserUserCFHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */; };
 		E493F1A81C8A78050030BD68 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1A71C8A78050030BD68 /* Math.swift */; };
 		E493F1AB1C8A784B0030BD68 /* recommenderAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1AA1C8A784B0030BD68 /* recommenderAlgorithm.swift */; };
@@ -54,7 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMoviesHandler.swift; sourceTree = "<group>"; };
 		E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postgreSQLConnect.swift; sourceTree = "<group>"; };
 		E45AD5621C9D9B2200133BC7 /* mathTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mathTest.swift; sourceTree = "<group>"; };
 		E45AD5641C9D9B3800133BC7 /* algorithmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = algorithmTest.swift; sourceTree = "<group>"; };
@@ -70,6 +69,8 @@
 		E48605991CB1323600CDC0C9 /* ItemItemCFHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemItemCFHandler.swift; sourceTree = "<group>"; };
 		E486059C1CB147B700CDC0C9 /* ItemDetailHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailHandler.swift; sourceTree = "<group>"; };
 		E486059E1CB14A8400CDC0C9 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		E48605A01CB14DE400CDC0C9 /* MovieSearchHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSearchHandler.swift; sourceTree = "<group>"; };
+		E48605A41CB177EF00CDC0C9 /* topNMoviesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = topNMoviesHandler.swift; sourceTree = "<group>"; };
 		E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUserCFHandler.swift; sourceTree = "<group>"; };
 		E493F1A71C8A78050030BD68 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		E493F1AA1C8A784B0030BD68 /* recommenderAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recommenderAlgorithm.swift; sourceTree = "<group>"; };
@@ -129,13 +130,14 @@
 			children = (
 				E46183381C54D72400C4D886 /* PerfectHandlers.swift */,
 				E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */,
-				E418B3F51C6DA1EA009420F0 /* TestMoviesHandler.swift */,
+				E48605A41CB177EF00CDC0C9 /* topNMoviesHandler.swift */,
 				E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */,
 				E48605991CB1323600CDC0C9 /* ItemItemCFHandler.swift */,
 				E486059C1CB147B700CDC0C9 /* ItemDetailHandler.swift */,
+				E48605A01CB14DE400CDC0C9 /* MovieSearchHandler.swift */,
 				E4CB45EA1CAFCA1500D49192 /* DataManager.swift */,
-				E461831D1C54D69000C4D886 /* rcmdServer.h */,
 				E486059E1CB14A8400CDC0C9 /* StringExtension.swift */,
+				E461831D1C54D69000C4D886 /* rcmdServer.h */,
 				E461831F1C54D69000C4D886 /* Info.plist */,
 			);
 			path = rcmdServer;
@@ -292,11 +294,12 @@
 				E486059D1CB147B700CDC0C9 /* ItemDetailHandler.swift in Sources */,
 				E493F1AD1C8A78AD0030BD68 /* Movie.swift in Sources */,
 				E46183391C54D72400C4D886 /* PerfectHandlers.swift in Sources */,
-				E418B3F61C6DA1EA009420F0 /* TestMoviesHandler.swift in Sources */,
+				E48605A11CB14DE400CDC0C9 /* MovieSearchHandler.swift in Sources */,
 				E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */,
 				E493F1AF1C8A78B10030BD68 /* People.swift in Sources */,
 				E493F1AB1C8A784B0030BD68 /* recommenderAlgorithm.swift in Sources */,
 				E493F1A61C8A775E0030BD68 /* UserUserCFHandler.swift in Sources */,
+				E48605A51CB177EF00CDC0C9 /* topNMoviesHandler.swift in Sources */,
 				E4CB45EB1CAFCA1500D49192 /* DataManager.swift in Sources */,
 				E48605971CB10A6200CDC0C9 /* Global.swift in Sources */,
 				E486059A1CB1323600CDC0C9 /* ItemItemCFHandler.swift in Sources */,
@@ -318,7 +321,6 @@
 				E45AD5651C9D9B3800133BC7 /* algorithmTest.swift in Sources */,
 				E48605981CB10AC100CDC0C9 /* Global.swift in Sources */,
 				E45F855A1C8BC60A008E25D5 /* postgreSQLConnect.swift in Sources */,
-				E45F855B1C8BC60A008E25D5 /* TestMoviesHandler.swift in Sources */,
 				E45F85601C8BC6BA008E25D5 /* CFTest.swift in Sources */,
 				E45AD5631C9D9B2200133BC7 /* mathTest.swift in Sources */,
 				E45F855C1C8BC60A008E25D5 /* UserUserCFHandler.swift in Sources */,
