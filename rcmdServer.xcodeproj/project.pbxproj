@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */; };
 		E42051D21CB2C140005E1182 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E486059E1CB14A8400CDC0C9 /* StringExtension.swift */; };
+		E42051D41CB2C199005E1182 /* postgreSQLConnectTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42051D31CB2C199005E1182 /* postgreSQLConnectTemplate.swift */; };
 		E45AD5631C9D9B2200133BC7 /* mathTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AD5621C9D9B2200133BC7 /* mathTest.swift */; };
 		E45AD5651C9D9B3800133BC7 /* algorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45AD5641C9D9B3800133BC7 /* algorithmTest.swift */; };
 		E45F85551C8BC60A008E25D5 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1AE1C8A78B10030BD68 /* People.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postgreSQLConnect.swift; sourceTree = "<group>"; };
+		E42051D31CB2C199005E1182 /* postgreSQLConnectTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = postgreSQLConnectTemplate.swift; sourceTree = "<group>"; };
 		E45AD5621C9D9B2200133BC7 /* mathTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mathTest.swift; sourceTree = "<group>"; };
 		E45AD5641C9D9B3800133BC7 /* algorithmTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = algorithmTest.swift; sourceTree = "<group>"; };
 		E45F855F1C8BC6BA008E25D5 /* CFTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFTest.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				E46183381C54D72400C4D886 /* PerfectHandlers.swift */,
 				E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */,
+				E42051D31CB2C199005E1182 /* postgreSQLConnectTemplate.swift */,
 				E48605A41CB177EF00CDC0C9 /* topNMoviesHandler.swift */,
 				E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */,
 				E48605991CB1323600CDC0C9 /* ItemItemCFHandler.swift */,
@@ -300,6 +303,7 @@
 				E493F1AD1C8A78AD0030BD68 /* Movie.swift in Sources */,
 				E46183391C54D72400C4D886 /* PerfectHandlers.swift in Sources */,
 				E48605A11CB14DE400CDC0C9 /* MovieSearchHandler.swift in Sources */,
+				E42051D41CB2C199005E1182 /* postgreSQLConnectTemplate.swift in Sources */,
 				E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */,
 				E493F1AF1C8A78B10030BD68 /* People.swift in Sources */,
 				E48605A71CB2614C00CDC0C9 /* RatingPOSTHandler.swift in Sources */,
