@@ -23,10 +23,10 @@ class ItemItemCFHandler: RequestHandler {
                 item = dataManager.getMovieWithID(itemID)
                 N = NInt
             } else {
-                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
             }
         } else {
-            resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestVariablesNotFound.rawValue, userInfo: nil))
+            resultStr = String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.requestVariablesNotFound.rawValue, userInfo: nil))
         }
         
         if let i = item, let N = N{
@@ -42,10 +42,10 @@ class ItemItemCFHandler: RequestHandler {
                 }
                 resultStr = String.JSONStrFromObject(jsonArray)
             } else {
-                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
             }
         } else {
-                resultStr = String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
+                resultStr = String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
         }
         
         response.addHeader("Content-Type", value: "application/json")

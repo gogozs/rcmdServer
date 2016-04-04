@@ -23,10 +23,10 @@ class MovieSearchHandler: RequestHandler {
                 }
                 resultStr = String.JSONStrFromObject(jsonArray)
             } else {
-                resultStr =  String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
+                resultStr =  String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
             }
         } else {
-                resultStr =  String.JSONStrErrorWithError(NSError.init(domain: errorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
+                resultStr =  String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
         }
         
         response.addHeader("Content-Type", value: "application/json")

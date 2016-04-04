@@ -50,6 +50,7 @@ public func PerfectServerModuleInit() {
 	// Test this one via command line with curl:
 	// curl --data "{\"id\":123}" http://0.0.0.0:8181/raw --header "Content-Type:application/json"
 	Routing.Routes["POST", "/raw"] = { _ in return RawPOSTHandler() }
+	Routing.Routes["POST", "/rating"] = { _ in return RatingPOSTHandler() }
 	
 	// Check the console to see the logical structure of what was installed.
 	print("\(Routing.Routes.description)")

@@ -19,6 +19,7 @@ let itemNameKey = "item_name"
 let itemCountKey = "item_count"
 
 let userIDKey = "user_id"
+let ratingKey = "rating"
 let countKey = "count"
 
 // MARK: - Response key
@@ -31,9 +32,16 @@ let movieReleaseDateKey = "release_date"
 let similarityKey = "similarity"
 
 // error
-let errorDomain = "me.songzhou.RCMDErrorDomain"
+let NetworkErrorDomain = "me.songzhou.RCMD.NetworkErrorDomain"
+let DatabaseErrorDomain = "me.songzhou.RCMD.DatabaseErrorDomain"
+
 enum NetworkError: Int {
     case requestFormatError
     case requestVariablesNotFound
+    case requestVariablesNotValid
     case resultNotFound
+}
+
+enum DatabaseError: Int {
+    case queryFailed
 }
