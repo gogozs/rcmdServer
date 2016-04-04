@@ -138,11 +138,11 @@
 				E48605991CB1323600CDC0C9 /* ItemItemCFHandler.swift */,
 				E486059C1CB147B700CDC0C9 /* ItemDetailHandler.swift */,
 				E48605A01CB14DE400CDC0C9 /* MovieSearchHandler.swift */,
+				E48605A61CB2614C00CDC0C9 /* RatingPOSTHandler.swift */,
 				E4CB45EA1CAFCA1500D49192 /* DataManager.swift */,
 				E486059E1CB14A8400CDC0C9 /* StringExtension.swift */,
 				E461831D1C54D69000C4D886 /* rcmdServer.h */,
 				E461831F1C54D69000C4D886 /* Info.plist */,
-				E48605A61CB2614C00CDC0C9 /* RatingPOSTHandler.swift */,
 			);
 			path = rcmdServer;
 			sourceTree = "<group>";
