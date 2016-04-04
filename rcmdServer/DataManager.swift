@@ -17,10 +17,11 @@ class DataManager {
     
     var users: [People]?
     var movies: [Movie]?
+    var searchedMovies = [Int: Movie]?()
+    var topRatedMovies: [String: Score]?
     
     private var usersDict = [Int: People]()
     private var moviesDict = [Int: Movie]()
-    var searchedMovies = [Int: Movie]?()
     
     init() {
         pgsl = PostgreSQL.PGConnection()
@@ -89,22 +90,6 @@ class DataManager {
         }
     }
     
-    func searchMovie(keyword: String) {
-        let select = "select * from movie where lower(name) like '%\(keyword)%'"
-        print(select)
-        let result = pgsl.exec(select)
-        let s = result.status()
-        if s == .CommandOK || s == .TuplesOK {
-            if result.numFields() > 0 && result.numTuples() > 0 {
-                searchedMovies = self.constructMovie(result)
-            } else {
-                searchedMovies = nil
-            }
-        } else {
-            searchedMovies = nil
-        }
-    }
-    
     // MARK: - Construct model from PGResult
     private func constructMovie(result: PGResult) -> [Int: Movie] {
         var moviesDict = [Int: Movie]()
@@ -120,7 +105,8 @@ class DataManager {
         return moviesDict
     }
     
-    // MARK -
+    
+    // MARK: - Get User/Movie
     func getUserWithUserID(id: Int) -> People? {
         return usersDict[id]
     }
@@ -129,4 +115,43 @@ class DataManager {
         return moviesDict[id]
     }
     
+    // MARK: - Feature
+    /// Search movies with keyword
+    func searchMovie(keyword: String) {
+        let select = "select * from movie where lower(name) like '%\(keyword)%'"
+        let result = pgsl.exec(select)
+        let s = result.status()
+        if s == .CommandOK || s == .TuplesOK {
+            if result.numFields() > 0 && result.numTuples() > 0 {
+                searchedMovies = self.constructMovie(result)
+            } else {
+                searchedMovies = nil
+            }
+        } else {
+            searchedMovies = nil
+        }
+    }
+    
+    func topRatedMovies(N: Int) {
+        let select = "select movie_id, avg(rating) from rating group by movie_id order by avg(rating) desc limit \(N)"
+        print("\(select)")
+        let result = pgsl.exec(select)
+        let s = result.status()
+        if s == .CommandOK || s == .TuplesOK {
+            if result.numFields() > 0 && result.numTuples() > 0 {
+                var dict = [String: Score]()
+                print("\(result.numTuples())")
+                for i in 0 ..< result.numTuples() {
+                    dict[result.getFieldString(i, fieldIndex: 0)] = result.getFieldDouble(i, fieldIndex: 1)
+                }
+                topRatedMovies = dict
+            } else {
+                topRatedMovies = nil
+            }
+        } else {
+                topRatedMovies = nil
+        }
+    }
+    
+   
 }
