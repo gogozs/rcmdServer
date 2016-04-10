@@ -43,7 +43,7 @@ class UserUserCollaborating {
         
         r = pearsonCorrelation(arrayA: validRatingsA, arrayB: validRatingsB) * commonMovieFactor;
         
-        return r;
+        return r.isNaN ? 0.0 : r;
         
     }
     
@@ -92,8 +92,6 @@ class UserUserCollaborating {
     
     func normalizationPredictedRatingForUser(u: People, withCorrelations correlations: correlation, peoples: [People], movies: [Movie]) {
         // calculate correlation with user u users avg rating
-        
-        
         for movie in movies {
             var sumOfWeightedRatings = 0.0
             var weights = 0.0
@@ -105,8 +103,8 @@ class UserUserCollaborating {
             }
             
             // if no one in correlations with user u has rated this movie
-            if weights == 0 {
-                u.predictions[movie] = 0
+            if weights == 0.0 {
+                u.predictions[movie] = -1.0
             } else {
                 u.predictions[movie] = sumOfWeightedRatings / weights + u.avgRating
             }
@@ -114,6 +112,7 @@ class UserUserCollaborating {
         
     }
     
+    /// convience method with top 5 correlations
     func normalizatoinPredictedRatingForUser(u: People, peoples: [People], movies: [Movie]) {
         let correlaitons = self.top5UsersWith(user: u, users: peoples, movies: movies)
         self.normalizationPredictedRatingForUser(u, withCorrelations: correlaitons, peoples: peoples, movies: movies)
@@ -236,7 +235,7 @@ class ItemItemCF {
     /// Predicting user `u` rating with target movie `i`
     func predictingRating(u: People, forItem i: Movie, movies: [Movie], users: [People]) -> Double {
         guard u.ratings.count >= 20 else {
-            return 0.0
+            return -1.0
         }
         
        let topMovies = self.similar20MoviesUserRated(u, movie: i, movies: movies, users: users)
@@ -250,7 +249,7 @@ class ItemItemCF {
         }
         
         guard weights != 0.0 else {
-            return 0.0
+            return -1.0
         }
         
         return sumOfWeightedRatings / weights
