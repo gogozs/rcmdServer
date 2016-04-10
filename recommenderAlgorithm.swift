@@ -114,6 +114,11 @@ class UserUserCollaborating {
         
     }
     
+    func normalizatoinPredictedRatingForUser(u: People, peoples: [People], movies: [Movie]) {
+        let correlaitons = self.top5UsersWith(user: u, users: peoples, movies: movies)
+        self.normalizationPredictedRatingForUser(u, withCorrelations: correlaitons, peoples: peoples, movies: movies)
+    }
+    
     
 }
 

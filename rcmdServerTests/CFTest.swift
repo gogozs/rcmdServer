@@ -104,37 +104,18 @@ class CFTest: XCTestCase {
         
         filter.normalizationPredictedRatingForUser(users[1]!, withCorrelations: correlaitons, peoples: Array(users.values), movies: Array(movies.values))
         
-        let predictions = users[1]!.predictions
-        let predictedKeys =  Array(predictions.keys)
-        let sortedMovies = predictedKeys.sort{predictions[$0] > predictions[$1]}
-        
-        // test top 5 predicted movies IDs are correct
-        XCTAssert(sortedMovies[0].id == 902)
-        XCTAssert(sortedMovies[1].id == 242)
-        XCTAssert(sortedMovies[2].id == 898)
-        XCTAssert(sortedMovies[3].id == 270)
-        XCTAssert(sortedMovies[4].id == 269)
-        
-        var jsonArray = [[String: AnyObject]]()
-        for i in 0...4 {
-            let movie = sortedMovies[i]
-            let item = ["id": movie.id,
-                        "name": movie.name,
-                        "genre": movie.genre ?? 0,
-                        "release_date": movie.release_data ?? "",
-                        "prediction": predictions[movie] ?? 0.0
-                        ]
-            jsonArray.append(item as! [String : AnyObject])
-        }
-        
-        do {
-            let data = try NSJSONSerialization.dataWithJSONObject(jsonArray, options: .PrettyPrinted)
-            let str = String.init(data: data, encoding: NSUTF8StringEncoding)
-            print("\(str!)")
-        } catch {
-        }
+        // test
+        top5PredictedMoviesForUser1()
         
     }
+    
+    func testNormalizationPredcitedRatingWithDefaultCorrrelation() {
+        let filter = UserUserCollaborating()
+        filter.normalizatoinPredictedRatingForUser(users[1]!, peoples: Array(users.values), movies: Array(movies.values))
+        // test
+        top5PredictedMoviesForUser1()
+    }
+    
     
     func testItemSimilarity() {
         // compare God Father
@@ -163,5 +144,19 @@ class CFTest: XCTestCase {
         for (movie, similarity) in r {
             print("\(movie.id): \(similarity)")
         }
+    }
+    
+    // MARK: - Private Methods
+    func top5PredictedMoviesForUser1() {
+        let predictions = users[1]!.predictions
+        let predictedKeys =  Array(predictions.keys)
+        let sortedMovies = predictedKeys.sort{predictions[$0] > predictions[$1]}
+        
+        // test top 5 predicted movies IDs are correct
+        XCTAssert(sortedMovies[0].id == 902)
+        XCTAssert(sortedMovies[1].id == 242)
+        XCTAssert(sortedMovies[2].id == 898)
+        XCTAssert(sortedMovies[3].id == 270)
+        XCTAssert(sortedMovies[4].id == 269)
     }
 }
