@@ -43,46 +43,30 @@ class EvaluateTest: XCTestCase {
         }
     }
     
-    func testRMSE() {
-        var count = 0
-        var result = 0.0
-        if let users = users, movies = movies {
-            for u in users {
-                // calculate predicted rating for user `u`
-                filter.normalizatoinPredictedRatingForUser(u, peoples: users, movies: movies)
-                for (movie, rating) in u.ratings {
-                    if let predicted = u.predictions[movie] where predicted != -1 { // ignore invalid predicted ratings
-                        result += pow(rating - predicted, 2)
-                        print("u:\(u.ID), movie: \(movie.id), rating:\(rating), predicted:\(predicted), pow:\(result)")
-                        count += 1
-                    }
-                    
-                    if count > testSuiteCount {
-                       break
-                    }
-                }
-                
-                if count > testSuiteCount {
-                   break
-                }
-            }
-        }
-        
-        let r = sqrt(result / Double(count))
-       print ("result:\(r)")
-    }
     
     func testMAE() {
+        for i in 5.stride(to: 100, by: 5){
+           self.MAE(i)
+        }
+    }
+    
+    func testRMSE() {
+        for i in 5.stride(to: 100, by: 5){
+           self.RMSE(i)
+        }
+    }
+    
+    // MARK: - Evaluate
+    func MAE(neighbours: Int) {
         var count = 0
         var result = 0.0
         if let users = users, movies = movies {
             for u in users {
                 // calculate predicted rating for user `u`
-                filter.normalizatoinPredictedRatingForUser(u, peoples: users, movies: movies)
+                filter.normalizatoinPredictedRatingForUser(u, N: neighbours, peoples: users, movies: movies)
                 for (movie, rating) in u.ratings {
                     if let predicted = u.predictions[movie] where predicted != -1 { // ignore invalid predicted ratings
                         result += fabs(rating - predicted)
-                        print("u:\(u.ID), movie: \(movie.id), rating:\(rating), predicted:\(predicted), pow:\(result)")
                         count += 1
                     }
                     
@@ -97,8 +81,35 @@ class EvaluateTest: XCTestCase {
             }
         }
         
-        let r = result / Double(count)
-       print ("result:\(r)")
+       let r = result / Double(count)
+       print ("neighbours: \(neighbours), MAE:\(r)")
     }
 
+    func RMSE(neighbours: Int) {
+        var count = 0
+        var result = 0.0
+        if let users = users, movies = movies {
+            for u in users {
+                // calculate predicted rating for user `u`
+                filter.normalizatoinPredictedRatingForUser(u, N: neighbours, peoples: users, movies: movies)
+                for (movie, rating) in u.ratings {
+                    if let predicted = u.predictions[movie] where predicted != -1 { // ignore invalid predicted ratings
+                        result += pow(rating - predicted, 2)
+                        count += 1
+                    }
+                    
+                    if count > testSuiteCount {
+                       break
+                    }
+                }
+                
+                if count > testSuiteCount {
+                   break
+                }
+            }
+        }
+        
+       let r = sqrt(result / Double(count))
+       print ("neighbours: \(neighbours), MAE:\(r)")
+    }
 }

@@ -115,6 +115,14 @@ class DataManager {
         return moviesDict[id]
     }
     
+    func getUserRatingWithMovieID(id: Int, userID: Int) -> Score? {
+        if let user = usersDict[userID], let movie = moviesDict[id] {
+           return user.ratings[movie]
+        }
+        
+        return nil
+    }
+    
     // MARK: - Feature
     /// Search movies with keyword
     func searchMovie(keyword: String) {

@@ -40,6 +40,7 @@ public func PerfectServerModuleInit() {
     Routing.Routes["GET", "/itemItemCF/{\(itemIDKey)}/{\(itemCountKey)}"] = {_ in return ItemItemCFHandler()}
     Routing.Routes["GET", "/movie/id/{\(itemIDKey)}"] = {_ in return ItemDetailHandler()}
     Routing.Routes["GET", "/movie/name/{\(itemNameKey)}"] = {_ in return MovieSearchHandler()}
+    Routing.Routes["GET", "/rating/{\(ratingKey)}"] = {_ in return UserRatingHandler()}
 	
 	Routing.Routes["POST", "/rating"] = { _ in return RatingPOSTHandler() }
 	

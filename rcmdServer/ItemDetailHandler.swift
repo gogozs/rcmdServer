@@ -12,6 +12,7 @@ import PostgreSQL
 
 class ItemDetailHandler: RequestHandler {
     func handleRequest(request: WebRequest, response: WebResponse) {
+        print("\(request.requestURI())")
         var resultStr = ""
         
         let dataManager = DataManager.sharedInstance

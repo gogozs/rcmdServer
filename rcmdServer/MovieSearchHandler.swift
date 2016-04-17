@@ -11,8 +11,9 @@ import PerfectLib
 
 class MovieSearchHandler: RequestHandler {
     func handleRequest(request: WebRequest, response: WebResponse) {
+        print("\(request.requestURI())")
         var resultStr = ""
-       let dataManager = DataManager.sharedInstance
+        let dataManager = DataManager.sharedInstance
         
         if let keyword = request.urlVariables[itemNameKey] {
             dataManager.searchMovie(keyword)
@@ -26,7 +27,7 @@ class MovieSearchHandler: RequestHandler {
                 resultStr =  String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
             }
         } else {
-                resultStr =  String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
+            resultStr =  String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.requestFormatError.rawValue, userInfo: nil))
         }
         
         response.addHeader("Content-Type", value: "application/json")

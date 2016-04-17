@@ -36,6 +36,9 @@
 		E48605A51CB177EF00CDC0C9 /* topNMoviesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48605A41CB177EF00CDC0C9 /* topNMoviesHandler.swift */; };
 		E48605A71CB2614C00CDC0C9 /* RatingPOSTHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48605A61CB2614C00CDC0C9 /* RatingPOSTHandler.swift */; };
 		E48605A81CB261FD00CDC0C9 /* RatingPOSTHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48605A61CB2614C00CDC0C9 /* RatingPOSTHandler.swift */; };
+		E491FDED1CC368A80046A834 /* userRatingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E491FDEC1CC368A80046A834 /* userRatingHandler.swift */; };
+		E491FDEE1CC369010046A834 /* userRatingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E491FDEC1CC368A80046A834 /* userRatingHandler.swift */; };
+		E491FDF01CC376BE0046A834 /* WebRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E491FDEF1CC376BE0046A834 /* WebRequestExtension.swift */; };
 		E493F1A61C8A775E0030BD68 /* UserUserCFHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */; };
 		E493F1A81C8A78050030BD68 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1A71C8A78050030BD68 /* Math.swift */; };
 		E493F1AB1C8A784B0030BD68 /* recommenderAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493F1AA1C8A784B0030BD68 /* recommenderAlgorithm.swift */; };
@@ -82,6 +85,8 @@
 		E48605A01CB14DE400CDC0C9 /* MovieSearchHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSearchHandler.swift; sourceTree = "<group>"; };
 		E48605A41CB177EF00CDC0C9 /* topNMoviesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = topNMoviesHandler.swift; sourceTree = "<group>"; };
 		E48605A61CB2614C00CDC0C9 /* RatingPOSTHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingPOSTHandler.swift; sourceTree = "<group>"; };
+		E491FDEC1CC368A80046A834 /* userRatingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userRatingHandler.swift; sourceTree = "<group>"; };
+		E491FDEF1CC376BE0046A834 /* WebRequestExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRequestExtension.swift; sourceTree = "<group>"; };
 		E493F1A51C8A775E0030BD68 /* UserUserCFHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUserCFHandler.swift; sourceTree = "<group>"; };
 		E493F1A71C8A78050030BD68 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		E493F1AA1C8A784B0030BD68 /* recommenderAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recommenderAlgorithm.swift; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				E46183381C54D72400C4D886 /* PerfectHandlers.swift */,
+				E491FDEC1CC368A80046A834 /* userRatingHandler.swift */,
 				E418B3F71C6DA64A009420F0 /* postgreSQLConnect.swift */,
 				E42051D31CB2C199005E1182 /* postgreSQLConnectTemplate.swift */,
 				E48605A41CB177EF00CDC0C9 /* topNMoviesHandler.swift */,
@@ -153,6 +159,7 @@
 				E486059E1CB14A8400CDC0C9 /* StringExtension.swift */,
 				E461831D1C54D69000C4D886 /* rcmdServer.h */,
 				E461831F1C54D69000C4D886 /* Info.plist */,
+				E491FDEF1CC376BE0046A834 /* WebRequestExtension.swift */,
 			);
 			path = rcmdServer;
 			sourceTree = "<group>";
@@ -312,6 +319,8 @@
 				E48605A11CB14DE400CDC0C9 /* MovieSearchHandler.swift in Sources */,
 				E42051D41CB2C199005E1182 /* postgreSQLConnectTemplate.swift in Sources */,
 				E418B3F81C6DA64A009420F0 /* postgreSQLConnect.swift in Sources */,
+				E491FDF01CC376BE0046A834 /* WebRequestExtension.swift in Sources */,
+				E491FDED1CC368A80046A834 /* userRatingHandler.swift in Sources */,
 				E493F1AF1C8A78B10030BD68 /* People.swift in Sources */,
 				E48605A71CB2614C00CDC0C9 /* RatingPOSTHandler.swift in Sources */,
 				E493F1AB1C8A784B0030BD68 /* recommenderAlgorithm.swift in Sources */,
@@ -337,6 +346,7 @@
 				E49BCBB31CB9F14800ED6222 /* postgreSQLConnectTemplate.swift in Sources */,
 				E42051D21CB2C140005E1182 /* StringExtension.swift in Sources */,
 				E45F85581C8BC60A008E25D5 /* recommenderAlgorithm.swift in Sources */,
+				E491FDEE1CC369010046A834 /* userRatingHandler.swift in Sources */,
 				E45F85591C8BC60A008E25D5 /* PerfectHandlers.swift in Sources */,
 				E48605A81CB261FD00CDC0C9 /* RatingPOSTHandler.swift in Sources */,
 				E45AD5651C9D9B3800133BC7 /* algorithmTest.swift in Sources */,

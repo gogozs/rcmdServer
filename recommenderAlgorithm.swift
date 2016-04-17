@@ -47,8 +47,18 @@ class UserUserCollaborating {
         
     }
     
-    // return top 5 most correlatd user IDs
+    /// return top 5 most correlatd user IDs
     func top5UsersWith(user u: People, users: [People], movies: [Movie]) -> (correlation) {
+        return self.topNUsersWith(user: u, N: 5, users: users, movies: movies)
+    }
+    
+    /// return top N most correlatd user IDs
+    /// @noted N must greater than 1
+    func topNUsersWith(user u: People, N: Int, users: [People], movies: [Movie]) -> (correlation) {
+        guard N > 1 else {
+            return correlation()
+        }
+        
         let targetPeople = u
     
         var correlations = targetPeople.correlations
@@ -62,7 +72,7 @@ class UserUserCollaborating {
     
         // omit self(0)
         var r = correlation()
-        for i in 1...5 {
+        for i in 1...N {
             let key = correlationsKeys[i]
             r[key] = correlations[key]!
         }
@@ -118,6 +128,11 @@ class UserUserCollaborating {
         self.normalizationPredictedRatingForUser(u, withCorrelations: correlaitons, peoples: peoples, movies: movies)
     }
     
+    /// convience method with top N correlations
+    func normalizatoinPredictedRatingForUser(u: People, N: Int, peoples: [People], movies: [Movie]) {
+        let correlaitons = self.topNUsersWith(user: u, N: N, users: peoples, movies: movies)
+        self.normalizationPredictedRatingForUser(u, withCorrelations: correlaitons, peoples: peoples, movies: movies)
+    }
     
 }
 
