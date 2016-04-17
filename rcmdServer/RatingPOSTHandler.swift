@@ -29,6 +29,7 @@ class RatingPOSTHandler: RequestHandler {
                     
                     let r = DataManager.sharedInstance.pgsl.exec(query)
                     if r.status() == .CommandOK {
+                        result = String.JSONStrFromObject([ratingKey: rating])
                     } else {
                         result = String.JSONStrErrorWithError(NSError.init(domain: DatabaseErrorDomain, code: DatabaseError.queryFailed.rawValue, userInfo: nil))
                     }

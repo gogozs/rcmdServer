@@ -116,10 +116,15 @@ class DataManager {
     }
     
     func getUserRatingWithMovieID(id: Int, userID: Int) -> Score? {
-        if let user = usersDict[userID], let movie = moviesDict[id] {
-           return user.ratings[movie]
+        let select = "select rating from rating where user_id = \(userID) and movie_id = \(id)"
+        print (select)
+        let result = pgsl.exec(select)
+        let s = result.status()
+        if s == .CommandOK || s == .TuplesOK {
+            if result.numFields() > 0 && result.numTuples() > 0 {
+                return result.getFieldDouble(0, fieldIndex: 0)
+            }
         }
-        
         return nil
     }
     
