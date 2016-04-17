@@ -19,7 +19,9 @@ class UserRatingHandler:  RequestHandler{
         if let parameters = parameters {
             if let userID = parameters[userIDKey], let movieID = parameters[movieIDKey]{
                 if let score = DataManager.sharedInstance.getUserRatingWithMovieID(Int(movieID)!, userID: Int(userID)!) {
-                    resultStr = String(score)
+                    resultStr = String.JSONStrFromObject([ratingKey: score])
+                } else {
+                    resultStr = String.JSONStrErrorWithError(NSError.init(domain: NetworkErrorDomain, code: NetworkError.resultNotFound.rawValue, userInfo: nil))
                 }
             }
         }
